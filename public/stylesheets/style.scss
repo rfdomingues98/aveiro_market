@@ -1,8 +1,80 @@
-body{
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
+
+* {
+  font-family: "Roboto", sans-serif;
+}
+
+body {
+  background-color: #f7f7f7;
 }
 
 a {
-  color: #00B7FF;
+  color: #000;
+
+  &:hover {
+    color: #000;
+  }
+}
+
+input[type="text"],
+input[type="search"] {
+  border-radius: 10rem;
+}
+
+.btn-primary {
+  border-radius: 10rem;
+}
+
+// ------------ Main Page --------------
+.trendy-sellers {
+  h1 {
+    display: inline-block;
+  }
+
+  .container > .row > .col-sm-12 {
+    max-height: 250px;
+    overflow: hidden;
+
+    .card {
+      width: 100%;
+      height: auto;
+      position: relative;
+      border: none;
+      display: flex;
+
+      .card-img {
+        width: 100%;
+        height: auto;
+      }
+
+      .card-img-overlay {
+        height: 250px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+  }
+}
+
+// ------------ Navbar --------------
+
+// ------------ Footer --------------
+footer {
+  font-size: 0.8rem;
+
+  .top-footer {
+    background-color: #e8e8e8;
+    padding: 0 15%;
+    width: 100%;
+  }
+
+  .bottom-footer {
+    min-height: 50px;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }

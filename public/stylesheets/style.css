@@ -1,0 +1,55 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
+* {
+  font-family: "Roboto", sans-serif; }
+
+body {
+  background-color: #f7f7f7; }
+
+a {
+  color: #000; }
+  a:hover {
+    color: #000; }
+
+input[type="text"],
+input[type="search"] {
+  border-radius: 10rem; }
+
+.btn-primary {
+  border-radius: 10rem; }
+
+.trendy-sellers h1 {
+  display: inline-block; }
+
+.trendy-sellers .container > .row > .col-sm-12 {
+  max-height: 250px;
+  overflow: hidden; }
+  .trendy-sellers .container > .row > .col-sm-12 .card {
+    width: 100%;
+    height: auto;
+    position: relative;
+    border: none;
+    display: flex; }
+    .trendy-sellers .container > .row > .col-sm-12 .card .card-img {
+      width: 100%;
+      height: auto; }
+    .trendy-sellers .container > .row > .col-sm-12 .card .card-img-overlay {
+      height: 250px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center; }
+
+footer {
+  font-size: 0.8rem; }
+  footer .top-footer {
+    background-color: #e8e8e8;
+    padding: 0 15%;
+    width: 100%; }
+  footer .bottom-footer {
+    min-height: 50px;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center; }
+
+/*# sourceMappingURL=style.css.map */
