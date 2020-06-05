@@ -2,8 +2,10 @@ var express = require('express');
 var router = express.Router();
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'AVEIRO|market - You buy, we' });
+router.get('/', function (req, res, next) {
+  res.render('index', {
+    title: 'AVEIRO|market - You buy, we deliver'
+  });
 });
 
 module.exports = router;

@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
   <div class="container">
-    <a class="navbar-brand" href="#"><strong>AVEIRO|market</strong></a>
+    <a class="navbar-brand" href="/"><strong>AVEIRO|market</strong></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -21,11 +21,18 @@
       </form>
       <ul class="navbar-nav ml-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart <span
+          <a class="nav-link" href="#"><i class="fa fa-home" aria-hidden="true"></i> Home <span
               class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#"><i class="fa fa-user-circle-o" aria-hidden="true"></i> Account</a>
+          <a class="nav-link" href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="accountDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            <i class="fa fa-user-circle-o" aria-hidden="true"></i> Account
+          </a>
+          {{> account_dropdown }}
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="languageDropdpwn" role="button" data-toggle="dropdown"
@@ -44,30 +51,32 @@
     </div>
   </div>
 </nav>
-<div class="container">
-  <div class="navbar navbar-expand-lg subnav">
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item dropdown "><small><a href="#" class="nav-link dropdown-toggle" id="sellersDropdown"
-              role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">ALL SELLERS</a>
-            <div class="dropdown-menu dropdown-menu" aria-labelledby="sellersDropdown">
-              <a class="dropdown-item" href="#">Farmácia Central</a>
-              <a class="dropdown-item" href="#">Garrafeira 5 Estrelas</a>
-              <a class="dropdown-item" href="#">Mercearia A Portuguesa</a>
-              <a class="dropdown-item" href="#">Talho Basilio</a>
-              <a class="dropdown-item" href="#">Têzero</a>
-              <a class="dropdown-item" href="#">Trendy Shop</a>
-            </div>
-        </li></small>
-        <li class="nav-item"><small><a href="#" class="nav-link">FOOD</a></li></small>
-        <li class="nav-item"><small><a href="#" class="nav-link">GROCERIES</a></li></small>
-        <li class="nav-item"><small><a href="#" class="nav-link">HEALTH</a></li></small>
-        <li class="nav-item"><small><a href="#" class="nav-link">ELECTRONICS</a></li></small>
-        <li class="nav-item"><small><a href="#" class="nav-link">APPAREL & SHOES</a></li></small>
-        <li class="nav-item"><small><a href="#" class="nav-link">PROMOS</a></li></small>
-      </ul>
-      <div class="ml-auto">
-        <a href="#" class="btn btn-primary"><small>SELL WITH US</small></a>
+<div class="subnav">
+  <div class="container">
+    <div class="navbar navbar-expand-lg">
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item dropdown "><small><a href="#" class="nav-link dropdown-toggle" id="sellersDropdown"
+                role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">ALL SELLERS</a>
+              <div class="dropdown-menu dropdown-menu" aria-labelledby="sellersDropdown">
+                <a class="dropdown-item" href="#">Farmácia Central</a>
+                <a class="dropdown-item" href="#">Garrafeira 5 Estrelas</a>
+                <a class="dropdown-item" href="#">Mercearia A Portuguesa</a>
+                <a class="dropdown-item" href="#">Talho Basilio</a>
+                <a class="dropdown-item" href="#">Têzero</a>
+                <a class="dropdown-item" href="#">Trendy Shop</a>
+              </div>
+          </li></small>
+          <li class="nav-item"><small><a href="#" class="nav-link">FOOD</a></li></small>
+          <li class="nav-item"><small><a href="#" class="nav-link">GROCERIES</a></li></small>
+          <li class="nav-item"><small><a href="#" class="nav-link">HEALTH</a></li></small>
+          <li class="nav-item"><small><a href="#" class="nav-link">ELECTRONICS</a></li></small>
+          <li class="nav-item"><small><a href="#" class="nav-link">APPAREL & SHOES</a></li></small>
+          <li class="nav-item"><small><a href="#" class="nav-link">PROMOS</a></li></small>
+        </ul>
+        <div class="ml-auto">
+          <a href="#" class="btn btn-primary"><small>SELL WITH US</small></a>
+        </div>
       </div>
     </div>
   </div>

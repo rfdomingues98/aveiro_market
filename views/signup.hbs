@@ -1,0 +1,42 @@
+<section class="signup">
+    <div class="container mt-5">
+        <h1 class="h3">SIGN UP</h1>
+        <form class="form w-100 p-5" role="form" method="post">
+            <h2 class="h5">Personal Details</h2>
+            <div class="form-row">
+                <div class="col-md-6 mt-3 px-3">
+                    <label for="firstName">First Name *</label>
+                    <input class="form-control" type="text" name="firstName" id="firstName" required>
+                </div>
+                <div class="col-md-6 mt-3 px-3">
+                    <label for="lastName">Last Name *</label>
+                    <input class="form-control" type="text" name="lastName" id="lastName" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md-6 mt-3 px-3">
+                    <label for="emailAddress">Email Address *</label>
+                    <input class="form-control" type="email" name="emailAddress" id="emailAddress" required>
+                </div>
+                <div class="col-md-6 mt-3 px-3">
+                    <label for="mobileNumber">Mobile Number *</label>
+                    <input class="form-control" type="tel" pattern="[0-9]{9}" name="mobileNumber" id="mobileNumber"
+                        required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md-6 mt-3 px-3">
+                    <label for="password1">Password *</label>
+                    <input class="form-control" type="text" name="password1" id="password1" required>
+                </div>
+                <div class="col-md-6 mt-3 px-3">
+                    <label for="password2">Repeat Password *</label>
+                    <input class="form-control" type="text" name="password2" id="password2" required>
+                </div>
+            </div>
+            <div class="form-row mt-5 d-flex justify-content-center">
+                <button type="submit" class="btn btn-primary">Sign Up</button>
+            </div>
+        </form>
+    </div>
+</section>

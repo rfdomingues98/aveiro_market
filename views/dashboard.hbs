@@ -1,0 +1,59 @@
+<section class="dashboard">
+    <div class="container">
+        <h1 class="h4 my-5">Dashboard</h1>
+        <div class="contents p-5">
+            <div id="header" class="d-flex flex-column align-items-center w-100">
+                <div class="row">
+                    <h2 class="h6 mb-3">Welcome</h2>
+                </div>
+                <div class="row w-100">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4 w-100 d-flex justify-content-center">
+                        <h2><strong class="h4 mb-5">{{user.name}}</strong></h2>
+                    </div>
+                    <div id="edit-profile" class="col-md-4">
+                        <a href="#" class="btn btn-primary mb-3">EDIT PROFILE</a>
+                    </div>
+                </div>
+                <div class="row">
+                    <img class="user-picture rounded rounded-pill" src="/images/default-user.png" alt="User Picture">
+                </div>
+            </div>
+            <div class="order-history mt-5">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Order History</a>
+                    </li>
+                </ul>
+                <div class="order-table border">
+                    {{# if user.order_history }}
+                    <div class="table-responsive">
+                        <table class="table table-striped text-center">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th scope="col">Order No.</th>
+                                    <th scope="col">Date</th>
+                                    <th scope="col">State</th>
+                                    <th scope="col">Details</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#each user.order_history}}
+                                <tr>
+                                    <td>{{this.order_no}}</td>
+                                    <td>{{this.date}}</td>
+                                    <td>{{this.state}}</td>
+                                    <td><a href="#">+ Show More</a></td>
+                                </tr>
+                                {{/each}}
+                            </tbody>
+                        </table>
+                    </div>
+                    {{ else }}
+                    <p class="text-center my-2">You have made no orders yet.</p>
+                    {{/ if}}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

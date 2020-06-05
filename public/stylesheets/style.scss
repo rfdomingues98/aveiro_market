@@ -17,12 +17,80 @@ a {
 }
 
 input[type="text"],
-input[type="search"] {
+input[type="search"],
+input[type="email"],
+input[type="tel"],
+input[type="password"] {
   border-radius: 10rem;
 }
 
 .btn-primary {
   border-radius: 10rem;
+}
+
+// ------------ Navbar --------------
+.subnav {
+  background-color: #fff;
+}
+
+@media (max-width: 576px) {
+  .subnav {
+    background-color: inherit;
+  }
+}
+
+#login-dp {
+  min-width: 250px;
+  padding: 14px 14px 0;
+  overflow: hidden;
+  background-color: rgba(255, 255, 255, 1);
+}
+
+#login-dp .help-block {
+  font-size: 12px
+}
+
+#login-dp .bottom {
+  background-color: rgba(255, 255, 255, 1);
+  border-top: 1px solid #ddd;
+  clear: both;
+  padding: 14px;
+}
+
+
+#login-dp .form-group {
+  margin-bottom: 10px;
+}
+
+@media(max-width:768px) {
+
+  #login-dp {
+    background-color: #fff;
+  }
+
+  #login-dp .bottom {
+    background-color: #fff;
+    border-top: 0 none;
+  }
+}
+
+// ------------ Footer --------------
+footer {
+  font-size: 0.8rem;
+
+  .top-footer {
+    background-color: #e8e8e8;
+    padding: 0 15%;
+    width: 100%;
+  }
+
+  .bottom-footer {
+    min-height: 50px;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 // ------------ Main Page --------------
@@ -31,7 +99,7 @@ input[type="search"] {
     display: inline-block;
   }
 
-  .container > .row > .col-sm-12 {
+  .container>.row>.col-sm-12 {
     max-height: 250px;
     overflow: hidden;
 
@@ -58,23 +126,39 @@ input[type="search"] {
   }
 }
 
-// ------------ Navbar --------------
-
-// ------------ Footer --------------
-footer {
-  font-size: 0.8rem;
-
-  .top-footer {
-    background-color: #e8e8e8;
-    padding: 0 15%;
-    width: 100%;
-  }
-
-  .bottom-footer {
-    min-height: 50px;
+// ------------ Sign Up Page --------------
+.signup {
+  form {
     background-color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  }
+}
+
+// ------------ Dashboard Page --------------
+.dashboard {
+  .contents {
+    background-color: #fff;
+
+    .user-picture {
+      max-width: 100px;
+    }
+
+    #edit-profile {
+      display: flex;
+      justify-content: end;
+    }
+
+    table {
+      margin-bottom: 0;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard {
+    .contents {
+      #edit-profile {
+        justify-content: center;
+      }
+    }
   }
 }
