@@ -5,7 +5,6 @@
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <form class="form-inline my-2 my-lg-0 ml-auto">
         <div class="p-1 bg-light rounded rounded-pill shadow-sm">
@@ -21,11 +20,11 @@
       </form>
       <ul class="navbar-nav ml-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="#"><i class="fa fa-home" aria-hidden="true"></i> Home <span
+          <a class="nav-link" href="/"><i class="fa fa-home" aria-hidden="true"></i> Home <span
               class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart</a>
+          <a class="nav-link" href="/cart"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart</a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="accountDropdown" role="button" data-toggle="dropdown"
@@ -56,17 +55,23 @@
     <div class="navbar navbar-expand-lg">
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
+          {{# if sellers}}
           <li class="nav-item dropdown "><small><a href="#" class="nav-link dropdown-toggle" id="sellersDropdown"
                 role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">ALL SELLERS</a>
               <div class="dropdown-menu dropdown-menu" aria-labelledby="sellersDropdown">
-                <a class="dropdown-item" href="#">Farmácia Central</a>
-                <a class="dropdown-item" href="#">Garrafeira 5 Estrelas</a>
-                <a class="dropdown-item" href="#">Mercearia A Portuguesa</a>
-                <a class="dropdown-item" href="#">Talho Basilio</a>
-                <a class="dropdown-item" href="#">Têzero</a>
-                <a class="dropdown-item" href="#">Trendy Shop</a>
+                {{# each sellers}}
+                <a class="dropdown-item" href="#">{{this}}</a>
+                {{/ each}}
               </div>
           </li></small>
+          {{else}}
+          <li class="nav-item dropdown"><small><a href="#" class="nav-link dropdown-toggle disabled"
+                id="sellersDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">ALL
+                SELLERS</a>
+              <div class="dropdown-menu dropdown-menu" aria-labelledby="sellersDropdown">
+              </div>
+          </li></small>
+          {{/if}}
           <li class="nav-item"><small><a href="#" class="nav-link">FOOD</a></li></small>
           <li class="nav-item"><small><a href="#" class="nav-link">GROCERIES</a></li></small>
           <li class="nav-item"><small><a href="#" class="nav-link">HEALTH</a></li></small>
@@ -75,7 +80,7 @@
           <li class="nav-item"><small><a href="#" class="nav-link">PROMOS</a></li></small>
         </ul>
         <div class="ml-auto">
-          <a href="#" class="btn btn-primary"><small>SELL WITH US</small></a>
+          <a href="/users/signup/seller" class="btn btn-primary"><small>SELL WITH US</small></a>
         </div>
       </div>
     </div>

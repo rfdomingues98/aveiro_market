@@ -39,6 +39,7 @@ app.use('/bootstrap', express.static(path.join(__dirname, 'node_modules/bootstra
 app.use('/jquery', express.static(path.join(__dirname, 'node_modules/jquery/dist')));
 app.use('/popper.js', express.static(path.join(__dirname, 'node_modules/popper.js/dist')));
 app.use('/font-awesome', express.static(path.join(__dirname, 'node_modules/font-awesome')));
+app.use('/rateit', express.static(path.join(__dirname, 'node_modules/jquery.rateit/scripts')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

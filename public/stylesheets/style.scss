@@ -1,5 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
 
+$primary: #5f4dee;
+
 * {
   font-family: "Roboto", sans-serif;
 }
@@ -20,7 +22,9 @@ input[type="text"],
 input[type="search"],
 input[type="email"],
 input[type="tel"],
-input[type="password"] {
+input[type="password"],
+input[type="file"],
+input[type="number"] {
   border-radius: 10rem;
 }
 
@@ -47,7 +51,7 @@ input[type="password"] {
 }
 
 #login-dp .help-block {
-  font-size: 12px
+  font-size: 12px;
 }
 
 #login-dp .bottom {
@@ -57,13 +61,11 @@ input[type="password"] {
   padding: 14px;
 }
 
-
 #login-dp .form-group {
   margin-bottom: 10px;
 }
 
-@media(max-width:768px) {
-
+@media (max-width: 768px) {
   #login-dp {
     background-color: #fff;
   }
@@ -153,6 +155,33 @@ footer {
   }
 }
 
+#catalog {
+  .container>.row>.col-12 {
+    overflow: hidden;
+
+    .card {
+      width: 100%;
+      position: relative;
+      display: flex;
+
+      .card-img-top {
+        width: 100%;
+        height: 15vw;
+        min-height: 15vw;
+        object-fit: cover;
+      }
+    }
+  }
+}
+
+#type {
+  padding: 5px;
+  border: 1.2px solid #c4cbd1;
+  border-radius: 50rem;
+  display: flex;
+  justify-content: space-around;
+}
+
 @media (max-width: 768px) {
   .dashboard {
     .contents {
@@ -161,4 +190,35 @@ footer {
       }
     }
   }
+
+  #catalog {
+    .container>.row>.col-12 {
+      .card {
+        .card-img-top {
+          height: 60vw;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 992px) {
+  #catalog {
+    .container>.row>.col-12 {
+      .card {
+        .card-img-top {
+          height: 25vw;
+        }
+      }
+    }
+  }
+}
+
+// ------------ Review Product Page --------------
+.rateit .rateit-selected {
+  color: $primary;
+}
+
+.rateit .rateit-hover {
+  color: lighten($primary, 15);
 }

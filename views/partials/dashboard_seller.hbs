@@ -1,0 +1,161 @@
+<div class="contents p-5">
+    <div id="header" class="d-flex flex-column align-items-center w-100">
+        <div class="row">
+            <h2 class="h6 mb-3">Welcome</h2>
+        </div>
+        <div class="row w-100">
+            <div class="col-md-4"></div>
+            <div class="col-md-4 w-100 d-flex justify-content-center">
+                <h2><strong class="h4 mb-5">{{user.name}}</strong></h2>
+            </div>
+            <div id="edit-profile" class="col-md-4">
+                <a href="#" class="btn btn-primary mb-3">EDIT PROFILE</a>
+            </div>
+        </div>
+        <div class="row">
+            <img class="user-picture rounded rounded-pill" src="/images/default-user.png" alt="User Picture">
+        </div>
+    </div>
+    <div class="order-history mt-5">
+        <ul class="nav nav-tabs" id="tabs">
+            <li class="nav-item">
+                <a class="nav-link active" href="#catalog">Catalog</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#add-products">Add Products</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#manage-orders">Manage Orders</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#analytics">Analytics</a>
+            </li>
+        </ul>
+        <div class="tab-content border">
+            <div class="tab-pane fade show active py-3" id="catalog">
+                <div class="container">
+                    {{# if catalog}}
+                    <div class="row">
+                        {{# each catalog}}
+                        <div class="col-12 col-md-6 col-lg-4 col-xl-3 d-flex">
+                            <div class="card flex-fill my-3">
+                                <img src=" /images/{{this.image}}" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{this.name}}</h5>
+                                    <h6 class="card-subtitle mb-2 text-muted">{{user.name}}</h6>
+                                    <div class="d-flex flex-column flex-md-row justify-content-between">
+                                        <h6><small>{{this.price}}€</small></h6>
+                                        <h6><small>STOCK {{this.stock}}
+                                                {{# if this.stockQty}}
+                                                Pcs
+                                                {{ else }}
+                                                kg
+                                                {{/ if}}
+                                            </small></h6>
+                                    </div>
+                                    <div class="d-flex justify-content-center">
+                                        <a href="#" class="btn btn-danger">DELETE PRODUCT</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {{/ each}}
+                    </div>
+                    {{ else }}
+                    <div class="d-flex justify-content-center align-items-center">
+                        <p class="my-0">Catalog is empty. Please <a class="text-primary" href="#add-products"
+                                data-toggle="tab">add
+                                new items.</a></p>
+                    </div>
+                    {{/if}}
+                </div>
+            </div>
+            <div class="tab-pane fade p-5" id="add-products">
+                <div class="container">
+                    <h1 class="h3 mb-3">Product Details</h1>
+                    <form method="POST" action="">
+                        <div class="form-row">
+                            <div class="form-group col-md-12 rounded rounded-pill">
+                                <label class="custom-file-label" for="inputImage">Image</label>
+                                <input type="file" class="form-control custom-file-input" id="inputImage">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="inputName">Display Name *</label>
+                                <input type="text" class="form-control" id="inputName">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label>Type *</label>
+                                <div id="type" class="form-group">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="radioQuantity"
+                                            id="inlineRadio1" value="option1">
+                                        <label class="form-check-label" for="inlineRadio1">Quantity</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="radioWeight"
+                                            id="inlineRadio2" value="option2">
+                                        <label class="form-check-label" for="inlineRadio2">Weight</label>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-3">
+                                <label for="inputPrice">Price *</label>
+                                <input type="number" min="0" class="form-control" id="inputPrice">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="inputStock">Stock *</label>
+                                <input type="number" class="form-control" id="inputStock">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="inputDescription">Description *</label>
+                                <input type="password" class="form-control" id="inputDescription">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputDetails">Product Details *</label>
+                            <textarea class="form-control" id="inputDetails"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Add to Catalog</button>
+                    </form>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="manage-orders">
+                <div class="manage-order-table border">
+                    {{# if orders }}
+                    <div class="table-responsive">
+                        <table class="table table-striped text-center">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th scope="col">Order No.</th>
+                                    <th scope="col">Amount</th>
+                                    <th scope="col">Details</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#each orders}}
+                                <tr>
+                                    <td>{{this.order_no}}</td>
+                                    <td>{{this.price}} €</td>
+                                    <td><a class="text-primary" href="#">+ Show More</a></td>
+                                </tr>
+                                {{/each}}
+                            </tbody>
+                        </table>
+                    </div>
+                    {{ else }}
+                    <p class="text-center my-2">You have no pending orders</p>
+                    {{/ if}}
+                </div>
+            </div>
+            <div class="tab-pane fade" id="analytics">
+                <p class="text-center my-2">UNDER CONSTRUCTION</p>
+            </div>
+        </div>
+
+    </div>
+</div>
