@@ -1,0 +1,89 @@
+<section class="manage-order">
+    <div class="container">
+        <h1 class="h3 mt-5">Order</h1>
+        <div class="table-responsive">
+            <table class="table table-striped text-center">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Product</th>
+                        <th scope="col">Weight (kg)</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each order.products}}
+                    <tr>
+                        <td>{{this.name}}</td>
+                        <td>{{this.weight}}</td>
+                        <td>{{this.quantity}}</td>
+                        <td>{{this.amount}}</td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+        <div class="summary p-5 d-flex flex-column">
+            <div class="row d-flex flex-column">
+                <div class="col-12 col-md-6">
+                    <h2 class="h5">Summary</h2>
+                </div>
+                <div class="col-12 col-md-6 d-flex flex-row justify-content-between">
+                    <p>Total Price</p>
+                    <p><strong>{{order.totalPrice}} €</strong></p>
+                </div>
+            </div>
+            <div class="row">
+                <button type="button" class="btn btn-primary mr-3" data-toggle="modal" data-target="#acceptModal">
+                    Accept Order
+                </button>
+
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#denyModal">
+                    Deny Order
+                </button>
+
+                <div class="modal fade" id="acceptModal" tabindex="-1" role="dialog" aria-labelledby="acceptModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="acceptModalLabel">Are you sure?</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                Are you sure you want to accept the order?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <a href="#" class="btn btn-primary text-white">Accept</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="denyModal" tabindex="-1" role="dialog" aria-labelledby="denyModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="denyModalLabel">Are you sure?</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                Are you sure you want to deny the order?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <a href="#" class="btn btn-primary text-white">Deny</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

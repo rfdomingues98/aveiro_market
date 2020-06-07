@@ -19,8 +19,13 @@ input[type="file"],
 input[type="number"] {
   border-radius: 10rem; }
 
-.btn-primary {
+.btn-primary,
+.btn-secondary {
   border-radius: 10rem; }
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+  margin-top: 0; }
 
 .subnav {
   background-color: #fff; }
@@ -136,5 +141,52 @@ footer {
 
 .rateit .rateit-hover {
   color: #9e93f5; }
+
+.rateit .rateit-preset {
+  color: #5f4dee; }
+
+.sellers .container > .row > .col-sm-12 {
+  max-height: 250px;
+  overflow: hidden; }
+  .sellers .container > .row > .col-sm-12 .card {
+    width: 100%;
+    height: auto;
+    position: relative;
+    border: none;
+    display: flex; }
+    .sellers .container > .row > .col-sm-12 .card .card-img {
+      width: 100%;
+      height: auto; }
+    .sellers .container > .row > .col-sm-12 .card .card-img-overlay {
+      height: 250px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center; }
+
+.cart .contents #product {
+  background-color: #fff; }
+
+.cart .contents img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover; }
+
+.cart .contents .row {
+  margin: 0; }
+
+.product-page .product-img {
+  width: 90%;
+  max-height: 90%;
+  object-fit: cover; }
+
+.product-page .img-thumbnail {
+  width: 75px;
+  max-height: 75px;
+  object-fit: cover; }
+
+.seller-page .seller-logo {
+  border-radius: 10rem !important;
+  max-width: 150px; }
 
 /*# sourceMappingURL=style.css.map */

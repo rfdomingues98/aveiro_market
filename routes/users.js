@@ -22,6 +22,14 @@ router.get('/signup', function (req, res, next) {
   res.render('signup', global_ctx);
 });
 
+router.get('/edit', function (req, res, next) {
+  res.render('edit_customer', global_ctx);
+});
+
+router.get('/edit/seller', function (req, res, next) {
+  res.render('edit_seller', global_ctx);
+});
+
 router.get('/signup/seller', function (req, res, next) {
   res.render('signup_seller', global_ctx);
 });
@@ -95,6 +103,83 @@ router.get('/dashboard', function (req, res, next) {
     ],
   }
   res.render('dashboard', ctx);
+});
+
+router.get('/dashboard/order/:id', function (req, res, next) {
+  let order = {
+    order_no: 123456789,
+    date: "Jan 12, 2020",
+    state: "On-Hold",
+    payment_method: 'Paypal',
+    products: [{
+        name: 'Test 1',
+        weight: '2.31',
+        quantity: '-',
+        amount: 9.49,
+      },
+      {
+        name: 'Test 1',
+        weight: '2.31',
+        quantity: '-',
+        amount: 9.49,
+      },
+      {
+        name: 'Test 1',
+        weight: '2.31',
+        quantity: '-',
+        amount: 9.49,
+      }
+    ],
+  };
+  totalPrice = 0;
+  order.products.forEach(element => {
+    totalPrice += element.amount;
+  });
+  order.totalPrice = totalPrice;
+  let ctx = {
+    ...global_ctx,
+    order: order,
+  }
+
+  res.render('order_status', ctx);
+});
+
+router.get('/dashboard/manage/:id', function (req, res, next) {
+  let order = {
+    order_no: 123456789,
+    date: "Jan 12, 2020",
+    state: "On-Hold",
+    payment_method: 'Paypal',
+    products: [{
+        name: 'Test 1',
+        weight: '2.31',
+        quantity: '-',
+        amount: 9.49,
+      },
+      {
+        name: 'Test 1',
+        weight: '2.31',
+        quantity: '-',
+        amount: 9.49,
+      },
+      {
+        name: 'Test 1',
+        weight: '2.31',
+        quantity: '-',
+        amount: 9.49,
+      }
+    ],
+  };
+  totalPrice = 0;
+  order.products.forEach(element => {
+    totalPrice += element.amount;
+  });
+  order.totalPrice = totalPrice;
+  let ctx = {
+    ...global_ctx,
+    order: order,
+  }
+  res.render('manage_order', ctx);
 });
 
 module.exports = router;

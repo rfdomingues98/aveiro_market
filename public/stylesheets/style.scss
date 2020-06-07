@@ -28,8 +28,14 @@ input[type="number"] {
   border-radius: 10rem;
 }
 
-.btn-primary {
+.btn-primary,
+.btn-secondary {
   border-radius: 10rem;
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+  margin-top: 0; // remove the gap so it doesn't close
 }
 
 // ------------ Navbar --------------
@@ -221,4 +227,82 @@ footer {
 
 .rateit .rateit-hover {
   color: lighten($primary, 15);
+}
+
+.rateit .rateit-preset {
+  color: $primary;
+}
+
+
+// ------------ Sellers Page --------------
+.sellers {
+  .container>.row>.col-sm-12 {
+    max-height: 250px;
+    overflow: hidden;
+
+    .card {
+      width: 100%;
+      height: auto;
+      position: relative;
+      border: none;
+      display: flex;
+
+      .card-img {
+        width: 100%;
+        height: auto;
+      }
+
+      .card-img-overlay {
+        height: 250px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+  }
+}
+
+// ------------ Cart Page --------------
+.cart {
+  .contents {
+    #product {
+      background-color: #fff;
+    }
+
+    img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+    }
+
+    .row {
+      margin: 0;
+    }
+  }
+}
+
+// ------------ Product Page --------------
+.product-page {
+  .product-img {
+    width: 90%;
+    max-height: 90%;
+    object-fit: cover;
+  }
+
+  .img-thumbnail {
+    width: 75px;
+    max-height: 75px;
+    object-fit: cover;
+  }
+
+}
+
+// ------------ Seller Page --------------
+.seller-page {
+  .seller-logo {
+    border-radius: 10rem !important;
+    max-width: 150px;
+
+  }
 }

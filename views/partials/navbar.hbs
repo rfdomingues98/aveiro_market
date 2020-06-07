@@ -50,14 +50,14 @@
     </div>
   </div>
 </nav>
-<div class="subnav">
+<div class="subnav shadow-sm">
   <div class="container">
     <div class="navbar navbar-expand-lg">
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           {{# if sellers}}
-          <li class="nav-item dropdown "><small><a href="#" class="nav-link dropdown-toggle" id="sellersDropdown"
-                role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">ALL SELLERS</a>
+          <li class="nav-item dropdown "><small><a href="/sellers" class="nav-link dropdown-toggle" id="sellersDropdown"
+                aria-haspopup="true" aria-expanded="false">ALL SELLERS</a>
               <div class="dropdown-menu dropdown-menu" aria-labelledby="sellersDropdown">
                 {{# each sellers}}
                 <a class="dropdown-item" href="#">{{this}}</a>
