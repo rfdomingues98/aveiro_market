@@ -1,15 +1,17 @@
 <section class="sellers">
     <div class="container">
         <h1 class="h3 mt-5">Sellers</h1>
-        {{# if sellers_info}}
+        {{# if sellers}}
         <div class="row">
-            {{# each sellers_info}}
+            {{# each sellers}}
             <div class="col-sm-12 col-md-6 my-3">
                 <div class="card bg-dark text-white">
-                    <img src="/images/{{this.image}}" class="card-img" alt="{{this.name}}">
+                    <img src="https://aveiro-market.s3.eu-west-3.amazonaws.com/sellers/{{this.dataValues.banner}}"
+                        class="card-img" alt="{{this.dataValues.displayName}}">
                     <div class="flex-container">
                         <div class="card-img-overlay">
-                            <img src="/images/{{this.logo}}" alt="Logo {{this.name}}" style="width: 25%;">
+                            <img src="https://aveiro-market.s3.eu-west-3.amazonaws.com/sellers/{{this.dataValues.logo}}"
+                                alt="Logo {{this.dataValues.name}}" style="width: 25%;">
                             <a href="#" class="btn btn-primary mt-3"><strong>SHOP NOW</strong></a>
                         </div>
                     </div>
@@ -17,7 +19,7 @@
             </div>
             {{/ each}}
         </div>
-        {{# ifHasMore maxPerPage totalSellers }}
+        {{# ifHasMore maxPerPage sellers.length }}
         <nav aria-label="Page navigation example">
             <ul class="pagination">
                 <li class="page-item"><a class="page-link" href="#">Previous</a></li>

@@ -1,64 +1,42 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+
+const models = require('../db/models');
+const Users = models.Users;
+const Addresses = models.Addresses;
 
 const global_ctx = {
   title: 'AVEIRO|market - You buy, we deliver',
-  sellers: [
-    'Farmácia Central',
-    'Garrafeira 5 Estrelas',
-    'Mercearia A Portuguesa',
-    'Talho Basilio',
-    'Têzero',
-    'Trendy Shop',
-  ],
 }
-
-function capitalize(str) {
+const capitalize = str => {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
 /* GET home page. */
-router.get('/', function (req, res, next) {
-  res.render('index', global_ctx);
+router.get('/', (req, res, next) => {
+  let ctx = {
+    ...global_ctx,
+    user: req.user
+  }
+  res.render('index', ctx);
 });
 
-router.get('/sellers', function (req, res, next) {
-  sellers = [{
-      name: 'Mercearia A Portuguesa',
-      image: 'mercearia-a-portuguesa.jpg',
-      logo: 'mercearia-logo.png'
-    },
-    {
-      name: 'Talho Basilio',
-      image: 'talho-basilio.jpg',
-      logo: 'talho-basilio-logo.png'
-    },
-    {
-      name: 'Trendy Store',
-      image: 'trendy-store.jpg',
-      logo: 'trendy-logo.png'
-    },
-    {
-      name: 'Farmácia Central',
-      image: 'farmacia-central.jpg',
-      logo: 'farmacia-logo.png'
-    },
-    {
-      name: 'TêZero',
-      image: 'tezero.jpg',
-      logo: 'tezero-logo.png'
-    },
-  ];
+router.get('/sellers', async (req, res, next) => {
   ctx = {
     ...global_ctx,
-    test: 1,
-    sellers_info: sellers,
     maxPerPage: 5,
-    totalSellers: sellers.length
   }
+  await Users.findAll({
+    where: {
+      userType: 1
+    }
+  }).then(sellers => {
+    ctx.sellers = sellers;
+    ctx.totalSellers = sellers.length;
+  });
   res.render('sellers', ctx);
 });
 
-router.get('/seller/:id', function (req, res, next) {
+router.get('/sellers/:id', async (req, res, next) => {
   let products = [{
       name: "Test 1",
       price: "123",
@@ -112,21 +90,18 @@ router.get('/seller/:id', function (req, res, next) {
   ];
   let ctx = {
     ...global_ctx,
-    seller: {
-      name: 'Trendy Store',
-      image: 'trendy-logo.png',
-      address: 'Rua Domingos Carrancho, 21, 3800-145 Aveiro',
-      phone: 234423330,
-      email: 'trendystore@mail.com'
-    },
     products,
     maxPerPage: 3,
   };
+  await Users.findByPk(req.params.id)
+    .then(seller => {
+      ctx.seller = seller;
+    })
   ctx.products_count = ctx.products.length;
   res.render('seller_page', ctx);
 });
 
-router.get('/products', function (req, res, next) {
+router.get('/products', (req, res, next) => {
   category_list = ["food", "groceries", "health", "electronics", "apparel", "promos"];
   category = req.query.category && category_list.includes(req.query.category) && req.query.category != '' ? capitalize(req.query.category) : 'Products';
 
@@ -200,18 +175,18 @@ router.get('/products', function (req, res, next) {
   res.render('products', ctx);
 });
 
-router.get('/products/:id', function (req, res, next) {
+router.get('/products/:id', (req, res, next) => {
   let ctx = {
     ...global_ctx,
   }
   res.render('product_page', ctx);
 });
 
-router.get('/review/:id', function (req, res, next) {
+router.get('/review/:id', (req, res, next) => {
   res.render('review_product', global_ctx);
 });
 
-router.get('/cart', function (req, res, next) {
+router.get('/cart', (req, res, next) => {
   let products = [{
       name: 'Test 1',
       amount: '2.31',
@@ -248,7 +223,7 @@ router.get('/cart', function (req, res, next) {
   res.render('cart', ctx);
 });
 
-router.get('/checkout/:id', function (req, res, next) {
+router.get('/checkout/:id', (req, res, next) => {
   let products = [{
       name: 'Test 1',
       amount: '2.31',

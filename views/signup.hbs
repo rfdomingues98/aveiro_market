@@ -1,7 +1,7 @@
 <section class="signup">
     <div class="container mt-5">
         <h1 class="h3">SIGN UP</h1>
-        <form class="form w-100 p-5" role="form" method="post">
+        <form class="form w-100 p-5" role="form" method="post" action="/users/signup">
             <h2 class="h5">Personal Details</h2>
             <div class="form-row">
                 <div class="col-md-6 mt-3 px-3">
@@ -27,17 +27,17 @@
             <div class="form-row">
                 <div class="col-md-6 mt-3 px-3">
                     <label for="password1">Password *</label>
-                    <input class="form-control" type="text" name="password1" id="password1" required>
+                    <input class="form-control" type="password" name="password1" id="password1" required>
                 </div>
                 <div class="col-md-6 mt-3 px-3">
                     <label for="password2">Repeat Password *</label>
-                    <input class="form-control" type="text" name="password2" id="password2" required>
+                    <input class="form-control" type="password" name="password2" id="password2" required>
                 </div>
             </div>
             <div class="form-row">
                 <div class="checkbox mt-3 px-3">
                     <label>
-                        <input type="checkbox"> Agree with <a href="#">Terms & Conditions</a>
+                        <input name="agree" type="checkbox"> Agree with <a href="#">Terms & Conditions</a>
                     </label>
                 </div>
             </div>

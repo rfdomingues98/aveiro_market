@@ -39,6 +39,11 @@ input[type="number"] {
 }
 
 // ------------ Navbar --------------
+.dropdown-menu {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
 .subnav {
   background-color: #fff;
 }

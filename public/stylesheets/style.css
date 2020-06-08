@@ -27,6 +27,10 @@ input[type="number"] {
   display: block;
   margin-top: 0; }
 
+.dropdown-menu {
+  max-height: 300px;
+  overflow-y: auto; }
+
 .subnav {
   background-color: #fff; }
 

@@ -2,16 +2,18 @@
     <div class="container">
         <div class="contentsbg-white">
             <div class="d-flex flex-column align-items-center p-5">
-                <img class="seller-logo" src="/images/{{seller.image}}" alt="">
-                <h1 class="h3 mt-3">{{seller.name}}</h1>
+                <img class="seller-logo"
+                    src="https://aveiro-market.s3.eu-west-3.amazonaws.com/sellers/{{seller.dataValues.logo}}" alt="">
+                <h1 class="h3 mt-3">{{seller.dataValues.displayName}}</h1>
                 <div class="social flex-row mt-2">
-                    <a href="#" class="text-primary"><i class="fa fa-facebook mr-md-3"></i></a>
-                    <a href="#" class="text-primary"><i class=" fa fa-instagram"></i></a>
+                    <a href="{{seller.dataValues.facebook}}" class="text-primary"><i
+                            class="fa fa-facebook mr-md-3"></i></a>
+                    <a href="{{seller.dataValues.facebook}}" class="text-primary"><i class=" fa fa-instagram"></i></a>
                 </div>
                 <div class="info d-flex flex-column flex-md-row justify-content-around mt-2">
-                    <p class="text-center mr-md-5">{{seller.address}}</p>
-                    <p class="text-center mr-md-5">{{seller.phone}}</p>
-                    <p class="text-center mr-md-5">{{seller.email}}</p>
+                    <p class="text-center mr-md-5">{{seller.dataValues.address}}</p>
+                    <p class="text-center mr-md-5">{{seller.dataValues.phone}}</p>
+                    <p class="text-center mr-md-5">{{seller.dataValues.email}}</p>
                 </div>
             </div>
             <div class="products mt-5">

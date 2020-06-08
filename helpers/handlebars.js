@@ -3,6 +3,9 @@ var register = function (Handlebars) {
         ifEquals: function (arg1, arg2, options) {
             return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
         },
+        ifNotEquals: function (arg1, arg2, options) {
+            return (arg1 != arg2) ? options.fn(this) : options.inverse(this);
+        },
         ifHasMore: function (arg1, arg2, options) {
             return (arg1 < arg2) ? options.fn(this) : options.inverse(this);
         }

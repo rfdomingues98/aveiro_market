@@ -1,28 +1,34 @@
 <section class="signup">
     <div class="container mt-5">
-        <form class="form w-100 p-5" role="form" method="post">
+        <form class="form w-100 p-5" role="form" method="post" action="/users/signup/seller"
+            enctype="multipart/form-data">
             <h2 class="h4 text-center mb-5">Welcome</h2>
             <div class="form-row d-flex flex-column align-items-center">
-                <h3 class="h6 mb-3">Profile Picture</h3>
+                <h3 class="h6 mb-3">Logo *</h3>
                 <div class="input-group px-3 mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
-                    </div>
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="inputGroupFile01"
-                            aria-describedby="inputGroupFileAddon01">
-                        <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                        <input type="file" class="custom-file-input" name="images" id="logoInput"
+                            aria-describedby="logoInputAddon" required>
+                        <label class="custom-file-label" name="logoInput" for="logoInput">Choose file</label>
+                    </div>
+                </div>
+                <h3 class="h6 mb-3">Banner *</h3>
+                <div class="input-group px-3 mb-3">
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" name="images" id="bannerInput"
+                            aria-describedby="bannerInputAddon" required>
+                        <label class="custom-file-label" name="bannerInput" for="bannerInput">Choose file</label>
                     </div>
                 </div>
             </div>
             <div class="form-row">
                 <div class="col-md-6 mt-3 px-3">
                     <label for="firstName">Display Name *</label>
-                    <input class="form-control" type="text" name="firstName" id="firstName" required>
+                    <input class="form-control" type="text" name="displayName" id="firstName" required>
                 </div>
                 <div class="col-md-6 mt-3 px-3">
                     <label for="lastName">Address *</label>
-                    <input class="form-control" type="text" name="lastName" id="lastName" required>
+                    <input class="form-control" type="text" name="address" id="lastName" required>
                 </div>
             </div>
             <div class="form-row">
@@ -38,28 +44,28 @@
             </div>
             <div class="form-row">
                 <div class="col-md-6 mt-3 px-3">
-                    <label for="password1">Facebook</label>
-                    <input class="form-control" type="text" name="password1" id="password1">
+                    <label for="facebook">Facebook</label>
+                    <input class="form-control" type="text" name="facebook" id="facebook">
                 </div>
                 <div class="col-md-6 mt-3 px-3">
-                    <label for="password2">Instagram</label>
-                    <input class="form-control" type="text" name="password2" id="password2">
+                    <label for="instagram">Instagram</label>
+                    <input class="form-control" type="text" name="instagram" id="instagram">
                 </div>
             </div>
             <div class="form-row">
                 <div class="col-md-6 mt-3 px-3">
                     <label for="password1">Password *</label>
-                    <input class="form-control" type="text" name="password1" id="password1" required>
+                    <input class="form-control" type="password" name="password1" id="password1" required>
                 </div>
                 <div class="col-md-6 mt-3 px-3">
                     <label for="password2">Repeat Password *</label>
-                    <input class="form-control" type="text" name="password2" id="password2" required>
+                    <input class="form-control" type="password" name="password2" id="password2" required>
                 </div>
             </div>
             <div class="form-row">
                 <div class="checkbox mt-3 px-3">
                     <label>
-                        <input type="checkbox"> Agree with <a href="#">Terms & Conditions</a>
+                        <input name="agree" type="checkbox"> Agree with <a href="#">Terms & Conditions</a>
                     </label>
                 </div>
             </div>
