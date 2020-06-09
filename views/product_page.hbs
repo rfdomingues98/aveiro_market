@@ -4,93 +4,94 @@
             <div class="col-md-6 product-img">
                 <div class="row">
                     <div class="col-md-2">
-                        <img class="img-responsive shadow-sm img-thumbnail mb-2" src="/images/blue-tshirt.jpg" alt="">
+                        <img class="img-responsive shadow-sm img-thumbnail mb-2"
+                            src="https://aveiro-market.s3.eu-west-3.amazonaws.com/products/{{product.dataValues.image}}"
+                            alt="">
                     </div>
                     <div class="col-md-10">
-                        <img class="img-responsive shadow product-img" src="/images/blue-tshirt.jpg" alt="">
+                        <img class="img-responsive shadow product-img"
+                            src="https://aveiro-market.s3.eu-west-3.amazonaws.com/products/{{product.dataValues.image}}"
+                            alt="">
                     </div>
                 </div>
             </div>
             <div class="col-md-6">
-                <h2 class="h6">Seller Name</h2>
-                <h2 class="h4">Product Name</h2>
-                <p class="description mt-2">Product description. Lorem ipsum dolor sit amet consectetur adipisicing
-                    elit. A,
-                    fuga!</p>
-                <div class="d-flex flex-column flex-md-row justify-content-between">
-                    <h2 class="h4">4.11€/kg</h2>
-                    <div class="d-flex">
-                        <h2 class="h4">Qty
-                        </h2>
-                        <input type="number" min="0" default="0" class="form-control mx-2" style="max-width: 100px;">
-                        <h2 class="h4">kg</h2>
+                <form action="/cart/add/{{product.dataValues.id}}" method="post">
+                    <h2 class="h6">{{seller.dataValues.displayName}}</h2>
+                    <h2 class="h4">{{product.dataValues.name}}</h2>
+                    <p class="description mt-2">{{product.dataValues.description}}</p>
+                    <div class="d-flex flex-column flex-md-row justify-content-between">
+                        {{# ifEquals product.dataValues.type 0}}
+                        <h2 class="h4">{{product.dataValues.price}}€/Uty</h2>
+                        {{ else }}
+                        <h2 class="h4">{{product.dataValues.price}}€/kg</h2>
+                        {{/ ifEquals}}
+                        <div class="d-flex">
+                            <h2 class="h4">Qty
+                            </h2>
+                            {{# ifEquals product.dataValues.type 0}}
+                            <input type="number" value="1" min="0" step="1" name="qty" class="form-control mx-2"
+                                style="max-width: 100px;">
+                            <h2 class="h4">Uty</h2>
+                            {{ else }}
+                            <input type="number" value="1" min="0" name="qty" step="0.01" class="form-control mx-2"
+                                style="max-width: 100px;">
+                            <h2 class="h4">kg</h2>
+                            {{/ ifEquals}}
+                        </div>
                     </div>
-                </div>
-                <a href="#" class="text-primary mt-">View Seller's Page</a>
-                <div class="buttons mt-3">
-                    <button class="btn btn-primary mr-md-3">ADD TO CART</button>
-                    <button class="btn btn-primary mt-3 mt-md-0">BUY NOW</button>
-                </div>
+                    <a href="/sellers/{{seller.dataValues.id}}" class="text-primary d-flex">View Seller's Page</a>
+                    <button type="submit" class="btn btn-primary mt-3">ADD TO CART</button>
+                </form>
             </div>
         </div>
         <div class="row my-5 p-5 bg-white">
             <div class="col-12">
                 <h2 class="h4">Product Details</h2>
-                <p class="mt-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure dolor itaque accusamus
-                    mollitia sint sit suscipit fuga recusandae dolorum commodi beatae molestiae praesentium assumenda
-                    debitis architecto quasi odio non, nostrum consequuntur saepe possimus laboriosam ratione ipsa
-                    expedita! Repellendus ipsam quis itaque quasi, ad provident molestiae maiores expedita deleniti odit
-                    dolorum.</p>
+                <p class="mt-2">{{product.dataValues.details}}</p>
             </div>
         </div>
+        {{# ifNotEquals reviews undefined}}
         <div class="row p-5 bg-white">
             <div class="col-12">
                 <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
                     <div class="d-flex flex-column">
-                        <h2 class="h4">Reviews (3)</h2>
+                        <h2 class="h4">Reviews ({{reviews.length}})</h2>
                         <div class="flex-row">
-                            <i class="fa fa-2x fa-star-o mr-2"></i><span class="h5"><span class="h2">4</span>/5 Avg.
+                            <i class="fa fa-2x fa-star-o mr-2"></i><span class="h5"><span
+                                    class="h2">{{avgRating}}</span>/5 Avg.
                                 Rating</span>
                         </div>
                     </div>
-                    <button class="btn btn-primary mt-3 mt-md-0" style="max-height: 50px;">WRITE REVIEW</button>
+                    <a href="/review/{{product.dataValues.id}}" class="btn btn-primary mt-3 mt-md-0"
+                        style="max-height: 50px;">WRITE REVIEW</a>
                 </div>
                 <div class="reviews mt-4">
+                    {{# each reviews }}
                     <div class="row">
                         <div class="col-md-2">
-                            <img src="/images/default-user.png" class="rounded rounded-pill img-thumbnail"
-                                alt="user_img">
+                            <img src="https://aveiro-market.s3.eu-west-3.amazonaws.com/sellers/{{this.User.dataValues.image}}"
+                                class="rounded rounded-pill img-thumbnail" alt="user_img">
                         </div>
                         <div class="col-md-10 p-2">
-                            <h2 class="h6">User Name</h2>
-                            <div class="rateit" data-rateit-value="4" data-rateit-ispreset="true"
-                                data-rateit-mode="font" data-rateit-readonly="true" style="font-family:fontawesome">
+                            <h2 class="h6">{{this.User.dataValues.firstName}} {{this.User.dataValues.lastName}}</h2>
+                            <div class="rateit" data-rateit-value="{{this.dataValues.score}}"
+                                data-rateit-ispreset="true" data-rateit-mode="font" data-rateit-readonly="true"
+                                style="font-family:fontawesome">
                             </div>
-                            <h3 class="h6"><small class="date">5 September 2019</small></h3>
-                            <p class="review">Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident atque
-                                distinctio mollitia suscipit fugiat debitis.</p>
+                            <h3 class="h6"><small class="date">{{this.dataValues.date}}</small></h3>
+                            <p class="review">{{this.dataValues.review}}</p>
                         </div>
                     </div>
+                    {{/ each}}
                     <hr>
-                    <div class="row">
-                        <div class="col-md-2">
-                            <img src="/images/default-user.png" class="rounded rounded-pill img-thumbnail"
-                                alt="user_img">
-                        </div>
-                        <div class="col-md-10 p-2">
-                            <h2 class="h6">User Name</h2>
-                            <div class="rateit" data-rateit-value="4" data-rateit-ispreset="true"
-                                data-rateit-mode="font" data-rateit-readonly="true" style="font-family:fontawesome">
-                            </div>
-                            <h3 class="h6"><small class="date">5 September 2019</small></h3>
-                            <p class="review">Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident atque
-                                distinctio mollitia suscipit fugiat debitis.</p>
-                        </div>
-                    </div>
                 </div>
             </div>
 
         </div>
+        {{ else }}
+        <p class="text-center">No reviews yet.</p>
+        {{/ ifNotEquals}}
     </div>
 </section>
 

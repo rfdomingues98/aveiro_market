@@ -56,12 +56,15 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item"><small><a href="/sellers" class="nav-link">ALL SELLERS</a></li></small>
-          <li class="nav-item"><small><a href="#" class="nav-link">FOOD</a></li></small>
-          <li class="nav-item"><small><a href="#" class="nav-link">GROCERIES</a></li></small>
-          <li class="nav-item"><small><a href="#" class="nav-link">HEALTH</a></li></small>
-          <li class="nav-item"><small><a href="#" class="nav-link">ELECTRONICS</a></li></small>
-          <li class="nav-item"><small><a href="#" class="nav-link">APPAREL & SHOES</a></li></small>
-          <li class="nav-item"><small><a href="#" class="nav-link">PROMOS</a></li></small>
+          <li class="nav-item"><small><a href="/products" class="nav-link">ALL PRODUCTS</a></li></small>
+          <li class="nav-item"><small><a href="/products?category=food" class="nav-link">FOOD</a></li></small>
+          <li class="nav-item"><small><a href="/products?category=groceries" class="nav-link">GROCERIES</a></li></small>
+          <li class="nav-item"><small><a href="/products?category=health" class="nav-link">HEALTH</a></li></small>
+          <li class="nav-item"><small><a href="/products?category=electronics" class="nav-link">ELECTRONICS</a></li>
+          </small>
+          <li class="nav-item"><small><a href="/products?category=apparel%26shoes" class="nav-link">APPAREL & SHOES</a>
+          </li></small>
+          <li class="nav-item"><small><a href="/products?category=promos" class="nav-link">PROMOS</a></li></small>
         </ul>
         {{# ifEquals user undefined}}
         <div class="ml-auto">

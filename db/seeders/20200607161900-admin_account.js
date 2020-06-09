@@ -1,14 +1,15 @@
 "use strict";
 const crypto = require("crypto");
-const { v4: uuidv4 } = require("uuid");
+const {
+  v4: uuidv4
+} = require("uuid");
 const password = crypto.createHash("md5").update("password").digest("hex");
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert(
       "Users",
-      [
-        {
+      [{
           id: uuidv4(),
           userType: 0,
           email: "customer@mail.com",
@@ -26,7 +27,7 @@ module.exports = {
         {
           id: uuidv4(),
           userType: 1,
-          email: "admin@mail.com",
+          email: "trendy@mail.com",
           password: password,
           displayName: "Trendy Store",
           firstName: "",
@@ -35,12 +36,13 @@ module.exports = {
           facebook: "",
           instagram: "",
           image: "default-user.png",
+          logo: "trendy-logo.png",
+          banner: "trendy-store.jpg",
           address: "Rua das Glicinias nº3 AA, 3810-700 Aveiro",
           createdAt: new Date(),
           updatedAt: new Date(),
         },
-      ],
-      {}
+      ], {}
     );
   },
 

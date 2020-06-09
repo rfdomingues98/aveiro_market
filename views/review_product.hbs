@@ -4,12 +4,21 @@
             <h1 class="h3">Add review</h1>
             <div class="contents p-5">
                 <h3 class="h5">Rating</h3>
-                <div class="rateit" data-rateit-step="1" data-rateit-resetable="false" data-rateit-mode="font"
-                    style="font-family:fontawesome">
-                </div>
-                <h3 class="h5 mt-3">Review</h3>
-                <textarea class="form-control" id="inputDetails"></textarea>
-                <button type="submit" class="btn btn-primary mt-3">Add Review</button>
+                <form action="/review/{{product_id}}" method="post">
+                    <select id="rating" name="rating">
+                        <option value="1">Very Bad</option>
+                        <option value="2">Bad</option>
+                        <option value="3">Ok</option>
+                        <option value="4">Great</option>
+                        <option value="5">Excellent</option>
+                    </select>
+                    <div class="rateit" data-rateit-backingfld="#rating" data-rateit-min="0"
+                        data-rateit-resetable="false" data-rateit-mode="font" style="font-family:fontawesome">
+                    </div>
+                    <h3 class="h5 mt-3">Review</h3>
+                    <textarea class="form-control" name="review" id="inputDetails"></textarea>
+                    <button type="submit" class="btn btn-primary mt-3">Add Review</button>
+                </form>
             </div>
         </form>
     </div>

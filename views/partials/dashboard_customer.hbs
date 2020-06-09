@@ -25,7 +25,7 @@
         <div class="tab-content">
             <div class="tab-pane fade show active" id="order-history">
                 <div class="order-table border">
-                    {{# if user.order_history }}
+                    {{# if order_history }}
                     <div class="table-responsive">
                         <table class="table table-striped text-center">
                             <thead class="thead-light">
@@ -37,12 +37,19 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {{#each user.order_history}}
+                                {{#each order_history}}
                                 <tr>
-                                    <td>{{this.order_no}}</td>
-                                    <td>{{this.date}}</td>
-                                    <td>{{this.state}}</td>
-                                    <td><a class="text-primary" href="#">+ Show More</a></td>
+                                    <td>{{this.dataValues.id}}</td>
+                                    <td>{{this.dataValues.date}}</td>
+                                    {{# ifEquals this.dataValues.state 0}}
+                                    <td>On-Hold</td>
+                                    {{ else ifEquals this.dataValues.state 1}}
+                                    <td>Accepted</td>
+                                    {{ else }}
+                                    <td>Rejected</td>
+                                    {{/ ifEquals}}
+                                    <td><a class="text-primary" href="/users/dashboard/order/{{this.dataValues.id}}">+
+                                            Show More</a></td>
                                 </tr>
                                 {{/each}}
                             </tbody>

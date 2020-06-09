@@ -1,13 +1,30 @@
 const express = require('express');
 const router = express.Router();
+const Sequelize = require('sequelize');
+const path = require('path');
+
+const {
+  ensureCustomer,
+  ensureSeller,
+  forwardAuthenticated,
+  ensureAuthenticated,
+} = require("../config/auth");
 
 const models = require('../db/models');
 const Users = models.Users;
 const Addresses = models.Addresses;
+const Categories = models.Categories;
+const Products = models.Products;
+const Orders = models.Orders;
+const Reviews = models.Reviews;
 
 const global_ctx = {
   title: 'AVEIRO|market - You buy, we deliver',
+  shipping: 3.5
 }
+
+const Cart = require('../helpers/cartHelper');
+
 const capitalize = str => {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
@@ -23,6 +40,7 @@ router.get('/', (req, res, next) => {
 router.get('/sellers', async (req, res, next) => {
   ctx = {
     ...global_ctx,
+    user: req.user,
     maxPerPage: 5,
   }
   await Users.findAll({
@@ -37,228 +55,203 @@ router.get('/sellers', async (req, res, next) => {
 });
 
 router.get('/sellers/:id', async (req, res, next) => {
-  let products = [{
-      name: "Test 1",
-      price: "123",
-      stock: 123,
-      image: "blue-tshirt.jpg",
-      stockQty: true,
-      stockWeight: false,
-      seller: 'Seller Name',
-      category: 'apparel'
-    },
-    {
-      name: "Test 1",
-      price: "123",
-      stock: 123,
-      image: "blue-tshirt.jpg",
-      stockQty: true,
-      stockWeight: false,
-      seller: 'Seller Name',
-      category: 'groceries'
-    },
-    {
-      name: "Test 1",
-      price: "123",
-      stock: 123,
-      image: "blue-tshirt.jpg",
-      stockQty: true,
-      stockWeight: false,
-      seller: 'Seller Name',
-      category: 'apparel'
-    },
-    {
-      name: "Test 1",
-      price: "123",
-      stock: 123,
-      image: "blue-tshirt.jpg",
-      stockQty: true,
-      stockWeight: false,
-      seller: 'Seller Name',
-      category: 'food'
-    },
-    {
-      name: "Test 1",
-      price: "123",
-      stock: 123,
-      image: "blue-tshirt.jpg",
-      stockQty: true,
-      stockWeight: false,
-      seller: 'Seller Name',
-      category: 'health'
-    },
-  ];
+
   let ctx = {
     ...global_ctx,
-    products,
+    user: req.user,
     maxPerPage: 3,
   };
   await Users.findByPk(req.params.id)
     .then(seller => {
+      console.log(seller);
       ctx.seller = seller;
+    })
+  await Products.findAll({
+      where: {
+        seller: req.params.id
+      }
+    })
+    .then(products => {
+      ctx.products = products;
+    })
+    .catch(err => {
+      console.log('ERROR! Couldnt get seller catalog!', err);
     })
   ctx.products_count = ctx.products.length;
   res.render('seller_page', ctx);
 });
 
-router.get('/products', (req, res, next) => {
-  category_list = ["food", "groceries", "health", "electronics", "apparel", "promos"];
+router.get('/products', async (req, res, next) => {
+  category_list = ["food", "groceries", "health", "electronics", "apparel&shoes", "promos"];
   category = req.query.category && category_list.includes(req.query.category) && req.query.category != '' ? capitalize(req.query.category) : 'Products';
-
-  let products = [{
-      name: "Test 1",
-      price: "123",
-      stock: 123,
-      image: "blue-tshirt.jpg",
-      stockQty: true,
-      stockWeight: false,
-      seller: 'Seller Name',
-      category: 'apparel'
-    },
-    {
-      name: "Test 1",
-      price: "123",
-      stock: 123,
-      image: "blue-tshirt.jpg",
-      stockQty: true,
-      stockWeight: false,
-      seller: 'Seller Name',
-      category: 'groceries'
-    },
-    {
-      name: "Test 1",
-      price: "123",
-      stock: 123,
-      image: "blue-tshirt.jpg",
-      stockQty: true,
-      stockWeight: false,
-      seller: 'Seller Name',
-      category: 'apparel'
-    },
-    {
-      name: "Test 1",
-      price: "123",
-      stock: 123,
-      image: "blue-tshirt.jpg",
-      stockQty: true,
-      stockWeight: false,
-      seller: 'Seller Name',
-      category: 'food'
-    },
-    {
-      name: "Test 1",
-      price: "123",
-      stock: 123,
-      image: "blue-tshirt.jpg",
-      stockQty: true,
-      stockWeight: false,
-      seller: 'Seller Name',
-      category: 'health'
-    },
-  ];
-  let products_by_category = [];
-  if (req.query.category) {
-    products.forEach(element => {
-      if (element.category == req.query.category) {
-        products_by_category.push(element)
-      }
-    });
-  }
-
   let ctx = {
     ...global_ctx,
+    user: req.user,
     category,
+    sellers: {},
     maxPerPage: 16,
   }
-  ctx.products = products_by_category.length != 0 ? products_by_category : products;
-  ctx.products_count = ctx.products.length;
+  if (!req.query.category) {
+    await Products.findAll()
+      .then(products => {
+        ctx.products = products;
+      }).catch(err => {
+        console.log('ERROR! Couldnt get products.', err);
+      })
+  } else {
+    let category_id;
+    await Categories.findOne({
+        where: {
+          category: {
+            [Sequelize.Op.like]: req.query.category
+          }
+        }
+      })
+      .then(result => {
+        category_id = result.dataValues.id;
+      })
+      .catch(err => {
+        console.log('ERROR! Couldnt get categories!', err);
+      })
+    await Products.findAll({
+        where: {
+          category: category_id
+        }
+      })
+      .then(result => {
+        ctx.products = result;
+      })
+      .catch(err => {
+        console.log('ERROR! Couldnt get products by category', err);
+      })
+  }
   res.render('products', ctx);
 });
 
-router.get('/products/:id', (req, res, next) => {
+router.get('/products/:id', async (req, res, next) => {
   let ctx = {
     ...global_ctx,
+    user: req.user,
   }
+  await Products.findByPk(req.params.id)
+    .then(product => {
+      ctx.product = product;
+    })
+    .catch(err => {
+      console.log('ERROR! Couldnt get product by id.', err);
+    });
+
+  await Users.findByPk(ctx.product.dataValues.seller.trim())
+    .then(seller => {
+      ctx.seller = seller;
+    })
+    .catch(err => {
+      console.log('ERROR! Couldnt get seller by id.', err);
+    })
+
+  await Reviews.findAll({
+      where: {
+        idProduct: req.params.id
+      },
+      include: [{
+        model: Users
+      }]
+    })
+    .then(result => {
+      result.forEach(item => {
+        item.dataValues.date = item.dataValues.date.toLocaleString('pt-PT', {
+          timezone: 'UTC'
+        });
+      })
+      ctx.reviews = result;
+    })
+    .catch(err => {
+      console.log(err);
+    })
+  let avgRating = 0;
+  ctx.reviews.forEach(key => {
+    avgRating += key.dataValues.score;;
+  })
+  avgRating /= ctx.reviews.length;
+  ctx.avgRating = avgRating;
   res.render('product_page', ctx);
 });
 
-router.get('/review/:id', (req, res, next) => {
-  res.render('review_product', global_ctx);
-});
-
-router.get('/cart', (req, res, next) => {
-  let products = [{
-      name: 'Test 1',
-      amount: '2.31',
-      quantity: '-',
-      price: 9.49,
-      image: 'griponal.jpg'
-    },
-    {
-      name: 'Test 1',
-      amount: '2.31',
-      quantity: '-',
-      price: 9.49,
-      image: 'man-jeans.jpg'
-    },
-    {
-      name: 'Test 1',
-      amount: '2.31',
-      quantity: '-',
-      price: 9.49,
-      image: 'blue-tshirt.jpg'
-    }
-  ];
-  let price = 0;
-  products.forEach(element => {
-    price += element.price;
-  });
+router.get('/review/:id', ensureAuthenticated, (req, res, next) => {
   let ctx = {
     ...global_ctx,
-    products,
-    shipping: 3.50,
+    user: req.user,
+    product_id: req.params.id
   }
-  ctx.price = price;
-  ctx.totalPrice = ctx.shipping + price;
-  res.render('cart', ctx);
+  res.render('review_product', ctx);
 });
 
-router.get('/checkout/:id', (req, res, next) => {
-  let products = [{
-      name: 'Test 1',
-      amount: '2.31',
-      quantity: '-',
-      price: 9.49,
-      image: 'griponal.jpg'
-    },
-    {
-      name: 'Test 1',
-      amount: '2.31',
-      quantity: '-',
-      price: 9.49,
-      image: 'man-jeans.jpg'
-    },
-    {
-      name: 'Test 1',
-      amount: '2.31',
-      quantity: '-',
-      price: 9.49,
-      image: 'blue-tshirt.jpg'
-    }
-  ];
-  let price = 0;
-  products.forEach(element => {
-    price += element.price;
-  });
+router.post('/review/:id', async (req, res, next) => {
+  let {
+    rating,
+    review
+  } = req.body;
+  let newReview = {
+    score: rating,
+    review,
+    idProduct: req.params.id,
+    idUser: req.user.id
+  }
+  Reviews.create(newReview)
+    .then(result => {
+      req.flash('success_msg', 'Review successfully added!');
+      res.redirect(path.join('/products/', req.params.id));
+    })
+});
+
+router.get('/checkout', ensureAuthenticated, (req, res, next) => {
   let ctx = {
     ...global_ctx,
-    products,
-    shipping: 3.50,
-    discount: 5,
+    user: req.user,
   }
-  ctx.price = price;
-  ctx.totalPrice = ctx.shipping + price - ctx.discount;
+  if (!req.session.cart) {
+    return res.render("cart", ctx);
+  }
+  let cart = new Cart(req.session.cart)
+  ctx.products = cart.generateArray();
+  let subtotal = 0;
+  ctx.products.forEach(element => {
+    subtotal += Number(element.price);
+  });
+  ctx.subtotal = subtotal.toFixed(2);
+  let totalPrice = 0;
+  ctx.products.forEach(element => {
+    totalPrice += parseFloat(element.price);
+  })
+  totalPrice += parseFloat(ctx.shipping);
+  ctx.totalPrice = totalPrice.toFixed(2);
   res.render('checkout', ctx);
+});
+
+router.post('/checkout', ensureAuthenticated, (req, res, next) => {
+  if (!req.session.cart) {
+    res.redirect('/cart');
+  }
+  let cart = new Cart(req.session.cart);
+  cart.totalPrice += global_ctx.shipping;
+  let newOrder = {
+    idCustomer: req.user.id,
+    idSeller: cart.items[Object.keys(cart.items)[0]].item.seller,
+    state: 0,
+    products: cart.items,
+    payment: 'paypal',
+    totalPrice: cart.totalPrice
+  }
+
+  Orders.create(newOrder)
+    .then(result => {
+      req.flash('success_msg', 'Order placed successfuly!')
+      res.redirect('/users/dashboard');
+    })
+    .catch(err => {
+      console.log('ERROR! Couldnt place order!\n', err);
+    })
+
 })
 
 module.exports = router;

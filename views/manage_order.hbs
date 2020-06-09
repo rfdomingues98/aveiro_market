@@ -6,7 +6,6 @@
                 <thead class="thead-light">
                     <tr>
                         <th scope="col">Product</th>
-                        <th scope="col">Weight (kg)</th>
                         <th scope="col">Quantity</th>
                         <th scope="col">Amount</th>
                     </tr>
@@ -14,10 +13,13 @@
                 <tbody>
                     {{#each order.products}}
                     <tr>
-                        <td>{{this.name}}</td>
-                        <td>{{this.weight}}</td>
-                        <td>{{this.quantity}}</td>
-                        <td>{{this.amount}}</td>
+                        <td><a href="/products/{{this.item.id}}">{{this.item.name}}</a></td>
+                        {{# ifEquals this.item.state 0}}
+                        <td>{{this.qty}} Uty</td>
+                        {{ else }}
+                        <td>{{this.qty}} kg</td>
+                        {{/ ifEquals}}
+                        <td>{{this.price}} €</td>
                     </tr>
                     {{/each}}
                 </tbody>
@@ -57,7 +59,8 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <a href="#" class="btn btn-primary text-white">Accept</a>
+                                <a href="/users/dashboard/manage/accept/{{order.id}}"
+                                    class="btn btn-primary text-white">Accept</a>
                             </div>
                         </div>
                     </div>
@@ -78,7 +81,8 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <a href="#" class="btn btn-primary text-white">Deny</a>
+                                <a href="/users/dashboard/manage/reject/{{order.id}}"
+                                    class="btn btn-primary text-white">Deny</a>
                             </div>
                         </div>
                     </div>
