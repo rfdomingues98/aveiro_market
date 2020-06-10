@@ -7,50 +7,28 @@
     </div>
     <div class="container">
         <div class="row">
+            {{# if sellers}}
+            {{# each sellers}}
             <div class="col-sm-12 col-md-6 my-3">
                 <div class="card bg-dark text-white">
-                    <img src="/images/garrafeira-5estrelas.jpg" class="card-img" alt="Garrafeira 5 Estrelas">
+                    <img src="https://aveiro-market.s3.eu-west-3.amazonaws.com/sellers/{{this.dataValues.banner}}"
+                        class="card-img" alt="{{this.dataValues.displayName}}">
                     <div class="flex-container">
                         <div class="card-img-overlay">
-                            <img src="/images/garrafeira-logo.png" alt="Logo Garrafeira 5 Estrelas" style="width: 25%;">
-                            <a href="#" class="btn btn-primary mt-3"><strong>SHOP NOW</strong></a>
+                            <img src="https://aveiro-market.s3.eu-west-3.amazonaws.com/sellers/{{this.dataValues.logo}}"
+                                alt="Logo Garrafeira 5 Estrelas" style="width: 25%;">
+                            <a href="/sellers/{{this.dataValues.id}}" class="btn btn-primary mt-3"><strong>SHOP
+                                    NOW</strong></a>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-sm-12 col-md-6 my-3">
-                <div class="card bg-dark text-white">
-                    <img src="/images/trendy-store.jpg" class="card-img" alt="Trendy Store">
-                    <div class="card-img-overlay">
-                        <div class="card-img-overlay">
-                            <img src="/images/trendy-logo.png" alt="Logo Trendy Store" style="width: 25%;">
-                            <a href="#" class="btn btn-primary mt-3"><strong>SHOP NOW</strong></a>
-                        </div>
-                    </div>
-                </div>
+            {{/ each}}
+            {{ else }}
+            <div class="col-12">
+                <p>No sellers yet.</p>
             </div>
-            <div class="col-sm-12 col-md-6 my-3">
-                <div class="card bg-dark text-white">
-                    <img src="/images/mercearia-a-portuguesa.jpg" class="card-img" alt="...">
-                    <div class="card-img-overlay">
-                        <div class="card-img-overlay">
-                            <img src="/images/mercearia-logo.png" alt="Logo Mercearia A Portuguesa" style="width: 25%;">
-                            <a href="#" class="btn btn-primary mt-3"><strong>SHOP NOW</strong></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-12 col-md-6 my-3">
-                <div class="card bg-dark text-white">
-                    <img src="/images/farmacia-central.jpg" class="card-img" alt="...">
-                    <div class="card-img-overlay">
-                        <div class="card-img-overlay">
-                            <img src="/images/farmacia-logo.png" alt="Logo Farmácia Central" style="width: 25%;">
-                            <a href="#" class="btn btn-primary mt-3"><strong>SHOP NOW</strong></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            {{/ if}}
         </div>
     </div>
 </section>

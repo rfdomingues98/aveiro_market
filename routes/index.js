@@ -29,11 +29,34 @@ const capitalize = str => {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
 /* GET home page. */
-router.get('/', (req, res, next) => {
+router.get('/', async (req, res, next) => {
   let ctx = {
     ...global_ctx,
-    user: req.user
+    user: req.user,
+    maxSellers: 4,
+    sellers: []
   }
+
+  let sellers;
+  await Users.findAll({
+      where: {
+        userType: 1
+      }
+    })
+    .then(result => {
+      sellers = result;
+    })
+    .catch(err => {
+      console.log(err);
+    })
+  if (sellers.length > ctx.maxSellers) {
+    for (let i = 0; i < ctx.maxSellers; i++) {
+      ctx.sellers.push(sellers[i]);
+    }
+  } else {
+    ctx.sellers = sellers;
+  }
+  console.log(ctx.sellers);
   res.render('index', ctx);
 });
 
