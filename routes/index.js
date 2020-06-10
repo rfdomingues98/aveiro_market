@@ -56,7 +56,6 @@ router.get('/', async (req, res, next) => {
   } else {
     ctx.sellers = sellers;
   }
-  console.log(ctx.sellers);
   res.render('index', ctx);
 });
 
@@ -86,7 +85,6 @@ router.get('/sellers/:id', async (req, res, next) => {
   };
   await Users.findByPk(req.params.id)
     .then(seller => {
-      console.log(seller);
       ctx.seller = seller;
     })
   await Products.findAll({

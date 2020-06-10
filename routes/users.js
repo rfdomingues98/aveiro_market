@@ -330,7 +330,6 @@ router.get('/dashboard', ensureAuthenticated, async (req, res, next) => {
 });
 
 router.get('/dashboard/delete', ensureSeller, async (req, res, next) => {
-  console.log(req.query.id);
   if (req.query.id !== undefined) {
     await Products.findByPk(req.query.id)
       .then(product => {
