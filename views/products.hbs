@@ -7,7 +7,7 @@
                 {{# each products}}
                 <div class="col-12 col-md-6 col-lg-4 col-xl-3 d-flex">
                     <div class="card flex-fill my-3">
-                        <a href="/products/{{this.dataValues.id}}"></a>
+                        <a id="linkFix" href="/products/{{this.dataValues.id}}"></a>
                         <img src="https://aveiro-market.s3.eu-west-3.amazonaws.com/products/{{this.dataValues.image}}"
                             class="card-img-top" alt="...">
                         <div class="card-body">

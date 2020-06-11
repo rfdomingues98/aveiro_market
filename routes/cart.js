@@ -35,10 +35,12 @@ router.get('/', (req, res, next) => {
     ctx.products = cart.generateArray();
     let subtotal = 0;
     ctx.products.forEach(element => {
+        element.price = Number(element.price).toFixed(2);
         subtotal += Number(element.price);
     });
     ctx.subtotal = subtotal.toFixed(2);
     ctx.totalPrice = parseFloat(ctx.subtotal) + parseFloat(ctx.shipping);
+    ctx.totalPrice = ctx.totalPrice.toFixed(2);
     res.render("cart", ctx);
 });
 

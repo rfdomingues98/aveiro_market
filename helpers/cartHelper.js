@@ -1,34 +1,19 @@
 module.exports = function Cart(oldCart) {
-    this.items = oldCart.items || {}
-    this.totalQty = oldCart.totalQty || 0
-    this.totalPrice = oldCart.totalPrice || 0
-
+    this.items = oldCart.items || {};
+    this.qty = oldCart.qty || 0;
+    this.totalPrice = oldCart.qty || 0;
 
     this.add = function (item, id, qty) {
-        var storedItem = this.items[id];
+        let storedItem = this.items[id];
         if (!storedItem) {
             storedItem = this.items[id] = {
-                item: item,
+                item: item.dataValues,
                 qty: 0,
-                price: 0,
+                price: 0
             }
         }
-
         storedItem.qty += parseInt(qty, 10);
-        storedItem.price += storedItem.item.dataValues.price * storedItem.qty;
-        this.totalQty += parseInt(storedItem.qty, 10);
-        this.totalPrice += storedItem.price;
-    }
-
-    this.reduceByOne = function (id) {
-        this.items[id].qty--
-        this.items[id].price -= this.items[id].item.price
-        this.totalQty--
-        this.totalPrice -= this.items[id].item.price
-
-        if (this.items[id].qty <= 0) {
-            delete this.items[id]
-        }
+        storedItem.price += Number(item.dataValues.price).toFixed(2) * parseInt(qty, 10);
     }
 
     this.removeItem = function (id) {
