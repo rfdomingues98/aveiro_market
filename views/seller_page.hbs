@@ -15,6 +15,11 @@
                     <p class="text-center mr-md-5">{{seller.dataValues.phone}}</p>
                     <p class="text-center mr-md-5">{{seller.dataValues.email}}</p>
                 </div>
+                {{# ifNotEquals seller.dataValues.description ''}}
+                <div class="description d-flex flex-row justify-content-center mt-2">
+                    <p>{{seller.dataValues.description}}</p>
+                </div>
+                {{/ ifNotEquals}}
             </div>
             <div class="products mt-5">
                 {{# if products}}

@@ -17,7 +17,6 @@ const {
 
 const models = require('../db/models');
 const Users = models.Users;
-const Addresses = models.Addresses;
 const Categories = models.Categories;
 const Products = models.Products;
 const Orders = models.Orders;
@@ -162,6 +161,7 @@ router.post('/signup/seller', forwardAuthenticated, seller_signup.array('images'
     address,
     emailAddress,
     mobileNumber,
+    description,
     facebook,
     instagram,
     password1,
@@ -213,6 +213,7 @@ router.post('/signup/seller', forwardAuthenticated, seller_signup.array('images'
                   lastName: '',
                   logo: req.files[0].key.replace('sellers/', ''),
                   banner: req.files[1].key.replace('sellers/', ''),
+                  description,
                   facebook,
                   instagram,
                   address,

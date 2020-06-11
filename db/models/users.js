@@ -61,10 +61,13 @@ module.exports = (sequelize, DataTypes) => {
     address: {
       type: DataTypes.STRING,
       allowNull: true
+    },
+    description: {
+      type: DataTypes.TEXT,
+      allowNull: true
     }
   }, {});
   Users.associate = function (models) {
-    Users.hasMany(models.Addresses);
     Users.hasMany(models.Reviews, {
       foreignKey: 'idUser'
     });

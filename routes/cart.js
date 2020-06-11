@@ -10,7 +10,6 @@ const {
 
 const models = require('../db/models');
 const Users = models.Users;
-const Addresses = models.Addresses;
 const Categories = models.Categories;
 const Products = models.Products;
 const Orders = models.Orders;
